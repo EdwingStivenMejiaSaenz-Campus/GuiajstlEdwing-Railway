@@ -1,0 +1,3 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ejercicio 7</title><link rel="stylesheet" href="../css/estilo.css"></head><body><div class="topbar"><div class="topbar-inner"><div class="logo">JSTL</div><a class="home-link" href="index.jsp">Atrás</a></div></div><main class="main"><div class="content-card narrow"><div class="tokens"><strong>Your tokens</strong><c:forTokens items="${param.delimText}" delims="${param.delim}" var="myToken"><p><c:out value="${myToken}"/></p></c:forTokens></div></div></main><footer class="footer">GuiajstlEdwing</footer></body></html>

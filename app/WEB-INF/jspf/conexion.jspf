@@ -1,0 +1,2 @@
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<sql:setDataSource var="empleados" driver="com.guiajstl.db.MemoryDriver" url="jdbc:guiajstl:empleados" user="root" password="" />

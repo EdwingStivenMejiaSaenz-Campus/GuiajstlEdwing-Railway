@@ -1,0 +1,8 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<%@include file="/WEB-INF/jspf/conexion.jspf"%>
+<c:set var="nombres" value="${param.nombres}"/><c:set var="apellido1" value="${param.apellido1}"/><c:set var="apellido2" value="${param.apellido2}"/><c:set var="edad" value="${param.edad}"/>
+<sql:update var="insertar" dataSource="${empleados}">INSERT INTO empleados (nombres, apellido1, apellido2, edad) VALUES (?, ?, ?, ?)<sql:param value="${nombres}"/><sql:param value="${apellido1}"/><sql:param value="${apellido2}"/><sql:param value="${edad}"/></sql:update>
+<sql:query var="result" scope="request" dataSource="${empleados}">SELECT id, nombres, apellido1, apellido2, edad FROM empleados ORDER BY id</sql:query>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ejercicio 8</title><link rel="stylesheet" href="../css/estilo.css"></head><body><div class="topbar"><div class="topbar-inner"><div class="logo">JSTL</div><a class="home-link" href="index.jsp">Atrás</a></div></div><main class="main"><div class="content-card"><table><thead><tr><th>Id</th><th>Nombre</th><th>Apellidos</th><th>Edad</th></tr></thead><tbody><c:forEach var="fila" items="${result.rows}"><tr><td><c:out value="${fila.id}"/></td><td><c:out value="${fila.nombres}"/></td><td><c:out value="${fila.apellido1}${fila.apellido2}"/></td><td><c:out value="${fila.edad}"/></td></tr></c:forEach></tbody></table></div></main><footer class="footer">GuiajstlEdwing</footer></body></html>
