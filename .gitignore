@@ -1,0 +1,9 @@
+# Generated build artifacts and local tooling
+*.class
+target/
+build/
+.idea/
+.vscode/
+.DS_Store
+.env
+.env.*
