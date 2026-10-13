@@ -1,0 +1,34 @@
+name: Preparar archivos del proyecto
+on:
+  push:
+    paths:
+      - "deployment.tar.zst.b64"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publicar-codigo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Descomprimir proyecto
+        shell: bash
+        run: |
+          set -euo pipefail
+          base64 --decode deployment.tar.zst.b64 > /tmp/guiajstl.tar.zst
+          mkdir -p /tmp/guiajstl
+          tar --zstd -xf /tmp/guiajstl.tar.zst -C /tmp/guiajstl
+          cp -a /tmp/guiajstl/. .
+          rm deployment.tar.zst.b64
+      - name: Publicar código en main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Publicar aplicación JSP/JSTL preparada para Railway"
+            git push
+          fi
